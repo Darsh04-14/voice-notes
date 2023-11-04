@@ -34,7 +34,7 @@ function App() {
         },
         {
           headers: {
-            'Authorization': `Bearer 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`,
+            'Authorization': `Bearer ${process.env.REACT_APP_OPENAI_SECRET_KEY}`,
           },
         }
       );
