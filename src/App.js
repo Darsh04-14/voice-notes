@@ -44,9 +44,6 @@ function App() {
     }
   };
 
-
-
-
   useEffect(() => {
     let totalSpeech = "";
     console.log(results, interimResult);
@@ -76,6 +73,7 @@ function App() {
             <DocumentScannerIcon fontSize="medium" style={{color: 'rgba(0,0,0,0.8)', fontSize: 25}} onClick={fetchFact}>Press me for notes</DocumentScannerIcon>
           </span>
         </div>
+        <p>{fact}</p>
       </div>
   );
 }
