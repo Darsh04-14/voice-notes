@@ -1,38 +1,60 @@
-.App {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Azeret+Mono:wght@300&family=Quicksand:wght@400;500;700&family=Turret+Road&family=Varela+Round&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Roboto+Mono:wght@400;500&family=Sofia+Sans:wght@200;300;400;500;600;700&family=Space+Grotesk&display=swap');
+
+* {
+  padding: 0;
+  margin: 0;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.title-wrapper {
+  height: 40pt;
+  /* -webkit-box-shadow: 27px 13px 0px 0px red; 
+  box-shadow: 27px 13px 0px 0px red; */
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.title-wrapper span {
+  font-family: 'Space Grotesk';
+  font-size: 40pt;
+  color: rgba(0, 0, 0, 0.8);
+  background-color: none;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.speech-content {
+  height: 70vh;
+  width: 60vw;
+  margin-top: 3vh;
+}
+
+.speech-content p {
+  font-size: 15pt;
+  font-family: 'Roboto Mono';
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.main-container {
   display: flex;
   flex-direction: column;
+  padding-top: 5vh;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background-color: #f3f3f3;
+}
+
+.btn-container {
+  display: flex;
+  width: 150px;
+  justify-content: space-evenly;
+}
+
+.btn {
+  background-color: rgba(225, 225, 225, 0.5);
+  border-radius: 50%;
+  cursor: pointer;
+  width: 50px;
+  height: 50px;
+  display: flex;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 }
