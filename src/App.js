@@ -18,7 +18,7 @@ function App() {
 
   const [fact, setFact] = useState('');
 
-  const fetchJoke = async () => {
+  const fetchFact = async () => {
     try {
       const response = await axios.post(
         'https://api.openai.com/v1/engines/text-davinci-002/completions',
@@ -28,15 +28,15 @@ function App() {
         },
         {
           headers: {
-            'Authorization': `Bearer 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`
+            'Authorization': `Bearer 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`
           }
         }
       );
 
-      setJoke(response.data.choices[0].text);
+      setFact(response.data.choices[0].text);
     } catch (error) {
       console.error('Error fetching from OpenAI:', error);
-      setJoke('Failed to fetch.');
+      setFact('Failed to fetch.');
     }
   };
 
@@ -60,8 +60,8 @@ function App() {
 
 
       <div>
-      <p>{joke || "Press button"}</p>
-        <button onClick={fetchJoke}>Press me for notes</button>
+      <p>{fact || "Press button"}</p>
+        <button onClick={fetchFact}>Press me for notes</button>
         </div>
 
     </div>
