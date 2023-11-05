@@ -12,12 +12,15 @@ import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import LectureSum from './LectureSum'
 import ReadMoreIcon from '@mui/icons-material/ReadMore';
 import { useNavigate } from 'react-router-dom';
+import LogoutIcon from '@mui/icons-material/Logout';
+import useAuth from '../hooks/useAuth';
 
 
 
 
 
 function Lectures() {
+    const {logOut} = useAuth();
     const [lectures, setLectures] = useState(null);
     const { getLectures, deleteLecture } = useDB();
     const [open, setOpen] = useState(false);
@@ -28,6 +31,15 @@ function Lectures() {
         const data = await getLectures();
         setLectures(data);
     }
+
+    const signOut = async() => {
+        try {
+          await logOut();
+        } catch (err) {
+          console.error(err);
+        }
+      }
+
     useEffect(() => {
         readLectures();
     }, [])
@@ -72,9 +84,15 @@ function Lectures() {
                 </Card>))}
             </div>
             <LectureSum open={open} setOpen={setOpen} summary={summary} quizQuestions={quizQuestions}/>
-                <span className="btn" onClick={() => navigate('/')} style={{marginBottom: '1%', backgroundColor: '#eeeeee'}}>
+            <div style={{display: 'flex', width: '20vw', justifyContent: 'space-evenly', marginBottom: '1%',}}>
+                <span className="btn" onClick={() => navigate('/')} style={{backgroundColor: '#eeeeee'}}>
                     <ReadMoreIcon sx={{ transform: 'rotate(180deg)', color: 'rgba(0,0,0,0.8)', fontSize: 25}}/>
                 </span>
+                <span className="btn" onClick={signOut} style={{backgroundColor: '#eeeeee'}}>
+                    <LogoutIcon style={{ color: 'rgba(0,0,0,0.8)', fontSize: 25 }}/>
+                </span>
+            </div>
+                
         </div>
     );
 }
