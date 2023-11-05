@@ -13,6 +13,7 @@ import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import useAuth from '../hooks/useAuth';
+import useDB from '../hooks/useDB';
 
 
 const theme = createTheme({
@@ -29,9 +30,11 @@ function Dashboard() {
   const [summary, setSummary] = useState('');
   const [quizQuestions, setQuizQuestions] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [title, setTitle] = useState(`Lecture @ ${new Date().toLocaleDateString()}`);
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
   const { logOut } = useAuth();
+  const { createLecture }  = useDB();
 
   const {
     error,
@@ -71,7 +74,7 @@ function Dashboard() {
           }
         );
       
-        setSummary(response.data.choices[0].text);
+        setSummary(response.data.choices[0].text.trim());
     } catch (error) {
       console.error('Error fetching from OpenAI:', error);
       setSummary('Failed to fetch.');
@@ -118,6 +121,12 @@ function Dashboard() {
   const handleOpen = () => setOpen(true);
 
   useEffect(() => {
+    if (quizQuestions.length !== 0) {
+        createLecture(title, transcribedText, summary, quizQuestions);
+    }
+  }, [quizQuestions]);
+
+  useEffect(() => {
     let totalSpeech = '';
     results.forEach((text) => {
       if (text.transcript) {
@@ -143,7 +152,8 @@ function Dashboard() {
                 id="standard-basic" 
                 variant="standard" 
                 color='ochre'
-                defaultValue={`Lecture @ ${new Date().toLocaleDateString()}`}  
+                defaultValue={title}  
+                onChange={(e) => {setTitle(e.target.value)}}
             />
             <p>{transcribedText}</p>
           </div>

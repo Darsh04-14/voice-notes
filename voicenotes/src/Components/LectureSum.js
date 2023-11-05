@@ -24,6 +24,7 @@ function LectureSum(props) {
 
     useEffect(() => {
         setScore("");
+        setCorrect([null, null, null, null, null]);
     }, [open]);
 
     if (!Array.isArray(quizQuestions)) return <></>;
