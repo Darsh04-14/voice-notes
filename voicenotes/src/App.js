@@ -5,9 +5,19 @@ import DocumentScannerIcon from '@mui/icons-material/DocumentScanner';
 import './App.css';
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
+import useAuth from './hooks/useAuth';
 
 function App() {
   const [speech, setSpeech] = useState('');
+  const { logOut } = useAuth();
+
+  const signOut = async () => {
+    try {
+      await logOut();
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   const {
     error,
@@ -77,6 +87,7 @@ function App() {
         </span>
       </div>
       <p>{fact}</p>
+      <button onClick={signOut}>Log Out</button>
     </div>
   );
 }
