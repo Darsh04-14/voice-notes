@@ -50,7 +50,7 @@ function Lectures() {
             </div>
             <div className='card-display'>
             {!lectures ? <CircularProgress/> : lectures.map((val, idx) => (    
-                <Card sx={{ width: '22vw', height: '35vh', bgcolor: '#f0f0f0', borderRadius: '10px', boxShadow: 'none', transition: '0.3s ease-in-out', "&:hover": {boxShadow: '3px 3px 10px 3px rgba(0,0,0,0.2)', marginTop: '-10px'} }} key={`card-${idx}`}>
+                <Card sx={{ width: '22vw', height: '35vh', bgcolor: '#f0f0f0', borderRadius: '10px', boxShadow: 'none', transition: '0.3s ease-in-out', position:'relative', "&:hover": {boxShadow: '3px 3px 10px 3px rgba(0,0,0,0.2)', zIndex: 1, marginTop: "-1%", marginBottom:"1%"} }} key={`card-${idx}`}>
                     <Typography sx={{ fontSize: 20, marginTop: '5%', marginLeft: '5%' }} variant="h1" gutterBottom>
                         {val.title}
                       </Typography>

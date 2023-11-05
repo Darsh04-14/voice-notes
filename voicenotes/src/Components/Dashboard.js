@@ -89,7 +89,7 @@ function Dashboard() {
         'https://api.openai.com/v1/engines/gpt-3.5-turbo-instruct/completions',
         {
           prompt: `Give me only a JSON array of 5 objects with a prompt field, an options field, and a correct_answer field
-          where prompt has the question, the options field has an array of 4 options, and the correct_answer field has an answer to the question.
+          where prompt has the question, the options field has an array of 4 options with 1 of them being the correct answer, and the correct_answer field has the correct answer to the question.
           Use this input as the material: "${transcribedText}"`,
           max_tokens: 2000 // Adjust the max_tokens if necessary
         },
