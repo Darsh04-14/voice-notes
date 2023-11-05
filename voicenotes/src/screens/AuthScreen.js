@@ -23,9 +23,6 @@ const AuthScreen = () => {
   };
 
   return (
-
-
-
     <div className="authscreen" >
       <div></div>
       <div className="project" >
@@ -41,8 +38,8 @@ const AuthScreen = () => {
             type="password"
             onChange={(e) => setPassword(e.target.value)}
           />
-          <button onClick={logIn}> Sign In</button>
-          <button onClick={createAccount}> Sign Up</button>
+          <button className="login-button" onClick={logIn}> Sign In</button>
+          <button className="signup-button" onClick={createAccount}> Sign Up</button>
         </div>
       </div>
     </div>

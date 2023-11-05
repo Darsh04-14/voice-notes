@@ -101,23 +101,28 @@
   font-size: 'Quicksand';
   font-weight: 500;
   text-align: center;
+  color: black;
 }
 
 .modal-body {
   margin-top: 2%;
   margin-bottom: 2%;
+  color: black;
 }
 
 .question-body {
   margin-top: 5%;
+  color: black;
 }
 
 .question-title {
   margin-bottom: 2%;
+  color: black;
 }
 
 .question-option {
   transition: 0.3s ease-in-out;
+  color: black;
   border-radius: 5px;
 }
 

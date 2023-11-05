@@ -136,7 +136,7 @@ function Dashboard() {
         {isLoading && <div className='loading-overlay'><CircularProgress/></div>} 
         <div className="main-container">
           <div className="title-wrapper">
-            <span>VoiceNotes</span>
+            <span>Lecture-Lenz</span>
           </div>
           <div className="speech-content">
             <TextField 

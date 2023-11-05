@@ -75,7 +75,7 @@ function LectureSum(props) {
                 ))}
             </FormControl>
             <Button onClick={handleSubmit} sx={{ width: '20%', marginLeft: '40%', marginTop: '2%' }}>Check Score</Button>
-            <p>{score}</p>
+            <p style={{color: 'black'}}>{score}</p>
         </Box>
     </Modal>
     );
