@@ -25,6 +25,7 @@ const AuthScreen = () => {
   return (
     <div className="authscreen">
       <div className="auth-card">
+        <h1>Lecture Lenz</h1>
         <input
           placeholder="Email..."
           onChange={(e) => setEmail(e.target.value)}
