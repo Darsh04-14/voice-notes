@@ -33,6 +33,14 @@ function Dashboard() {
   const navigate = useNavigate();
   const { logOut } = useAuth();
 
+
+//neel
+  const [correction, setCorrection] = useState('');
+  const [uniqueSentences, setUniqueSentences] = useState([]);
+  const [sentToApi, setSentToApi] = useState(new Set());
+
+//neel
+
   const {
     error,
     interimResult,
@@ -129,6 +137,140 @@ function Dashboard() {
     setTranscribedText(totalSpeech);
   }, [results, interimResult]);
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  useEffect(() => {
+    const logSentences = () => {
+      const sentences = transcribedText.split('. ').filter(Boolean);
+      const trimmedSentences = sentences.map(sentence => sentence.trim() + '.');
+ 
+
+
+
+
+      const currentUniqueSet = new Set(uniqueSentences);
+ 
+
+
+
+
+      const newUniqueSentences = trimmedSentences.filter(sentence => !currentUniqueSet.has(sentence));
+ 
+      if (newUniqueSentences.length > 0) {
+
+
+
+
+        newUniqueSentences.forEach(sentence => currentUniqueSet.add(sentence));
+ 
+
+
+
+
+        const updatedSentences = Array.from(currentUniqueSet);
+        setUniqueSentences(updatedSentences);
+       
+     
+    
+      }
+    };
+ 
+    const intervalId = setInterval(logSentences, 2500);
+ 
+    return () => clearInterval(intervalId);
+  }, [transcribedText]);
+ 
+
+
+  useEffect(() => {
+    const sendSentenceToAPI = async (sentence) => {
+      try {
+        const response = await axios.post(
+          'https://api.openai.com/v1/engines/gpt-3.5-turbo-instruct/completions',
+          {
+            prompt: `Please fix any transcription errors that have occurred and add punctuation in the following sentence: ${sentence}`,
+            max_tokens: 60
+          },
+          {
+            headers: {
+              'Authorization': `Bearer ${process.env.REACT_APP_OPENAI_SECRET_KEY}`
+            }
+          }
+        );
+
+
+
+
+        setCorrection(prev => prev + response.data.choices[0].text + ' ');
+        setSentToApi(prev => new Set(prev).add(sentence)); 
+      } catch (error) {
+        console.error('Error fetching from OpenAI:', error);
+      }
+    };
+
+
+
+
+   
+    uniqueSentences.forEach(sentence => {
+      if (!sentToApi.has(sentence)) {
+        sendSentenceToAPI(sentence);
+      }
+    });
+  }, [uniqueSentences]);
+
+
+
+  console.log(correction);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   if (error) return <p>Web Speech API is not available in this browser 🤷‍</p>;
 
   return (
@@ -147,6 +289,22 @@ function Dashboard() {
             />
             <p>{transcribedText}</p>
           </div>
+
+
+          <div className="speech-content">
+  {correction.split('\n').map((line, index) => (
+    <p key={index}>
+      {line}
+    </p>
+  ))}
+</div>
+
+
+
+
+
+
+
           <div className="btn-container">
             <span className="btn" onClick={isRecording ? stopSpeechToText : startSpeechToText}>
               {isRecording ? <MicIcon style={{ color: 'rgba(0,0,0,0.8)', fontSize: 30 }} /> : <MicOffIcon style={{ color: 'rgba(0,0,0,0.8)', fontSize: 30 }} />}
