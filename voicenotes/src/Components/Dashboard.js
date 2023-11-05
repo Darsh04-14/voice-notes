@@ -10,6 +10,7 @@ import './styles.css';
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
+import useAuth from '../hooks/useAuth';
 
 
 const theme = createTheme({
@@ -26,6 +27,7 @@ function Dashboard() {
   const [quizQuestions, setQuizQuestions] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+  const { logOut } = useAuth();
 
   const {
     error,
@@ -38,6 +40,14 @@ function Dashboard() {
     continuous: true,
     useLegacyResults: false,
   });
+
+  const signOut = async() => {
+    try {
+      await logOut();
+    } catch (err) {
+      console.error(err);
+    }
+  }
 
   const fetchFact = async () => {
     if (transcribedText === "") return;
@@ -138,6 +148,7 @@ function Dashboard() {
               <ReadMoreIcon style={{ color: 'rgba(0,0,0,0.8)', fontSize: 25 }}/>
             </span>
           </div>
+          <button onClick={signOut}>Log Out</button>
         </div>
     </ThemeProvider>
   );

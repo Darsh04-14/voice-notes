@@ -15,7 +15,6 @@ const AuthScreen = () => {
   };
 
   const createAccount = async () => {
-    console.log("clicked");
     try {
       await signUp(email, password);
     } catch (err) {
