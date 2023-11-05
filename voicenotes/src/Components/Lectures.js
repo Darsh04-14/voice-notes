@@ -54,7 +54,7 @@ function Lectures() {
                     <Typography sx={{ fontSize: 20, marginTop: '5%', marginLeft: '5%' }} variant="h1" gutterBottom>
                         {val.title}
                       </Typography>
-                    <CardContent sx={{ overflow: 'scroll', height: '60%'}}>
+                    <CardContent sx={{ overflow: 'scroll', height: '70%'}}>
                       <Typography variant="body2">
                       {val.transcript}
                       </Typography>
