@@ -29,7 +29,7 @@ const AuthScreen = () => {
     <div className="authscreen" >
       <div></div>
       <div className="project" >
-        <h1 className="auth-card1">Lecture-Lenz</h1>
+        <h1 className="auth-card1">Lecture-Lenz 💫</h1>
         <div className="auth-card">
 
           <input
