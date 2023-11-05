@@ -5,12 +5,15 @@ import reportWebVitals from './reportWebVitals';
 import UserPath from './userPath';
 import { AuthProvider } from './hooks/useAuth';
 import { BrowserRouter } from 'react-router-dom';
+import { DBProvider } from './hooks/useDB';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
     <AuthProvider>
-      <UserPath />
+      <DBProvider>
+        <UserPath />
+      </DBProvider>
     </AuthProvider>
   </BrowserRouter>
 );

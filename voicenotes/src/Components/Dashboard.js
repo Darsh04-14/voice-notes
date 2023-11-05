@@ -11,6 +11,7 @@ import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import useAuth from '../hooks/useAuth';
+// import useDB from '../hooks/useDB';
 
 
 const theme = createTheme({
@@ -28,6 +29,7 @@ function Dashboard() {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const { logOut } = useAuth();
+  // const { getLectures, createLecture, deleteLecture } = useDB();
 
   const {
     error,
@@ -109,6 +111,21 @@ function Dashboard() {
     }
   };
 
+  // const readAll = async () => {
+  //   const lectures = await getLectures("ezKdgj7oMoNMxEKBBo6L7wKclrh2");
+  //   console.log(lectures);
+  // }
+
+  // const deleteOne = async (id) => {
+  //   await deleteLecture("FsZ5gL0zIAWqjpByTfpV");
+  //   await readAll();
+  // }
+
+  // const createOne = async() => {
+  //   await createLecture("new title", "new transcript", "summ ary", "quiz time!!");
+  //   await readAll();
+  // }
+
   useEffect(() => {
     let totalSpeech = '';
     console.log(results, interimResult);
@@ -149,6 +166,9 @@ function Dashboard() {
             </span>
           </div>
           <button onClick={signOut}>Log Out</button>
+          {/* <button onClick={readAll}>Read All</button>
+          <button onClick={deleteOne}>Delete One</button>
+          <button onClick={createOne}>Create One</button> */}
         </div>
     </ThemeProvider>
   );
