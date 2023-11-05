@@ -35,3 +35,42 @@
     background-color: #27ae60;
     color: #fff;
 }
+
+.auth-card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* Box shadow effect */
+    max-width: 320px;
+    padding: 20px;
+    text-align: center;
+    margin: 0 auto;
+    /* Center the card horizontally */
+}
+
+.authscreen input {
+    width: 100%;
+    padding: 7px;
+    margin: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.authscreen button {
+    padding: 10px 20px;
+    margin: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.authscreen button:nth-child(1) {
+    background-color: #3498db;
+    color: #fff;
+}
+
+.authscreen button:nth-child(2) {
+    background-color: #27ae60;
+    color: #fff;
+}
