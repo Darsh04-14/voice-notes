@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import useAuth from '../hooks/useAuth';
-
+import './authScreen.css';
 const AuthScreen = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -21,9 +21,9 @@ const AuthScreen = () => {
       console.error(err);
     }
   };
-  
-  return(
-   <div>
+
+  return (
+    <div className="authscreen">
       <input
         placeholder="Email..."
         onChange={(e) => setEmail(e.target.value)}
@@ -35,7 +35,8 @@ const AuthScreen = () => {
       />
       <button onClick={logIn}> Sign In</button>
       <button onClick={createAccount}> Sign Up</button>
-   </div>
+    </div>
+
   )
 };
 
