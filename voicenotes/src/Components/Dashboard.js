@@ -2,10 +2,12 @@ import useSpeechToText from 'react-hook-speech-to-text';
 import MicIcon from '@mui/icons-material/Mic';
 import MicOffIcon from '@mui/icons-material/MicOff';
 import DocumentScannerIcon from '@mui/icons-material/DocumentScanner';
-import CircularProgress from '@mui/material/CircularProgress';
+import {CircularProgress} from '@mui/material';
 import TextField from '@mui/material/TextField';
 import ReadMoreIcon from '@mui/icons-material/ReadMore';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import LogoutIcon from '@mui/icons-material/Logout';
+import LectureSum from '../Components/LectureSum'
 import './styles.css';
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
@@ -20,12 +22,14 @@ const theme = createTheme({
       },
     },
 });
+  
 
 function Dashboard() {
   const [transcribedText, setTranscribedText] = useState('');
-  const [fact, setFact] = useState('');
-  const [quizQuestions, setQuizQuestions] = useState(null);
+  const [summary, setSummary] = useState('');
+  const [quizQuestions, setQuizQuestions] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [open, setOpen] = useState(false);
   const navigate = useNavigate();
   const { logOut } = useAuth();
 
@@ -49,7 +53,7 @@ function Dashboard() {
     }
   }
 
-  const fetchFact = async () => {
+  const fetchSummary = async () => {
     if (transcribedText === "") return;
     setIsLoading(true);
     try {
@@ -67,17 +71,16 @@ function Dashboard() {
           }
         );
       
-        setFact(response.data.choices[0].text);
+        setSummary(response.data.choices[0].text);
     } catch (error) {
       console.error('Error fetching from OpenAI:', error);
-      setFact('Failed to fetch.');
+      setSummary('Failed to fetch.');
     } finally {
-        setIsLoading(false);
+        fetchQuizQuestions();
     }
   };
 
   const fetchQuizQuestions = async () => {
-    const text_input ='hey class today we will be talking about matricies, addition, subtraction, multiplication, and also inverse matricies';
     try {
       const response = await axios.post(
         'https://api.openai.com/v1/engines/gpt-3.5-turbo-instruct/completions',
@@ -106,14 +109,21 @@ function Dashboard() {
     } catch (error) {
       console.error('Error fetching from OpenAI:', error);
       setQuizQuestions([]);
+    } finally {
+        setIsLoading(false);
+        handleOpen();
     }
   };
 
+  const handleOpen = () => setOpen(true);
+
   useEffect(() => {
     let totalSpeech = '';
-    console.log(results, interimResult);
     results.forEach((text) => {
-      if (text.transcript) totalSpeech += text.transcript + '. ';
+      if (text.transcript) {
+        text.transcript = text.transcript.charAt(0).toUpperCase() + text.transcript.slice(1);
+        totalSpeech += text.transcript + '. ';
+        }
     });
     if (interimResult) totalSpeech += interimResult;
     setTranscribedText(totalSpeech);
@@ -141,15 +151,18 @@ function Dashboard() {
             <span className="btn" onClick={isRecording ? stopSpeechToText : startSpeechToText}>
               {isRecording ? <MicIcon style={{ color: 'rgba(0,0,0,0.8)', fontSize: 30 }} /> : <MicOffIcon style={{ color: 'rgba(0,0,0,0.8)', fontSize: 30 }} />}
             </span>
-            <span className="btn" onClick={fetchFact}>
+            <span className="btn" onClick={fetchSummary}>
               <DocumentScannerIcon style={{ color: 'rgba(0,0,0,0.8)', fontSize: 25 }}/>
             </span>
             <span className="btn" onClick={() => navigate('/lectures')}>
               <ReadMoreIcon style={{ color: 'rgba(0,0,0,0.8)', fontSize: 25 }}/>
             </span>
+            <span className="btn" onClick={signOut}>
+                <LogoutIcon style={{ color: 'rgba(0,0,0,0.8)', fontSize: 25 }}/>
+            </span>
           </div>
-          <button onClick={signOut}>Log Out</button>
         </div>
+        <LectureSum open={open} setOpen={setOpen} summary={summary} quizQuestions={quizQuestions}/>
     </ThemeProvider>
   );
 }

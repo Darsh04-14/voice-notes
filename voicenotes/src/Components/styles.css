@@ -33,10 +33,12 @@
   box-shadow:  0 0 5px 5px rgba(0, 0, 0, 0.1);
   /* background-color: #f3f3f3; */
   /* background-color: rgba(255, 0, 0, 0.557); */
+  overflow: scroll;
 }
 
 .speech-content p {
   font-size: 15pt;
+  margin-top: 15px;
   font-family: 'Roboto Mono';
   font-weight: 500;
   color: rgba(0, 0, 0, 0.6);
@@ -93,4 +95,42 @@
   background-color: rgba(0, 0, 0, 0.05);
   z-index: 2;
 }
+
+.modal-title {
+  font-size: 25pt;
+  font-size: 'Quicksand';
+  font-weight: 500;
+  text-align: center;
+}
+
+.modal-body {
+  margin-top: 2%;
+  margin-bottom: 2%;
+}
+
+.question-body {
+  margin-top: 5%;
+}
+
+.question-title {
+  margin-bottom: 2%;
+}
+
+.question-option {
+  transition: 0.3s ease-in-out;
+  border-radius: 5px;
+}
+
+.question-option:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.question-option-correct {
+  background-color: rgba(144, 238, 144, 0.5);
+}
+
+.question-option-wrong {
+  background-color: rgba(240, 128, 128, 0.5)
+}
+
 
