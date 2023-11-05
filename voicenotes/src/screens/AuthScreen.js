@@ -23,23 +23,29 @@ const AuthScreen = () => {
   };
 
   return (
-    <div className="authscreen">
-      <div className="auth-card">
-        <h1>Lecture Lenz</h1>
-        <input
-          placeholder="Email..."
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <input
-          placeholder="Password..."
-          type="password"
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <button onClick={logIn}> Sign In</button>
-        <button onClick={createAccount}> Sign Up</button>
+
+
+
+    <div className="authscreen" >
+      <div></div>
+      <div className="project" >
+        <h1 className="auth-card1">Lecture-Lenz</h1>
+        <div className="auth-card">
+
+          <input
+            placeholder="Email..."
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <input
+            placeholder="Password..."
+            type="password"
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <button onClick={logIn}> Sign In</button>
+          <button onClick={createAccount}> Sign Up</button>
+        </div>
       </div>
     </div>
-
 
   )
 };
